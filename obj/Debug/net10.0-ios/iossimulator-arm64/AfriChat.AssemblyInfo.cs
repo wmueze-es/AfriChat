@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AfriChat")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+1ec0c480f0a6fbab3a13360c9d11610d0d9068e9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+6c06fc34a957dbde097a71fc93094c158e2d94ba")]
 [assembly: System.Reflection.AssemblyProductAttribute("AfriChat")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AfriChat")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

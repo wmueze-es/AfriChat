@@ -26,13 +26,11 @@
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net10.0-android": {
-            "framework": "net10.0-android36.0",
+          "net10.0-android36.0": {
             "targetAlias": "net10.0-android",
             "projectReferences": {}
           },
-          "net10.0-ios": {
-            "framework": "net10.0-ios26.5",
+          "net10.0-ios26.5": {
             "targetAlias": "net10.0-ios",
             "projectReferences": {}
           }
@@ -50,8 +48,7 @@
         "SdkAnalysisLevel": "10.0.300"
       },
       "frameworks": {
-        "net10.0-android": {
-          "framework": "net10.0-android36.0",
+        "net10.0-android36.0": {
           "targetAlias": "net10.0-android",
           "dependencies": {
             "CommunityToolkit.Maui": {
@@ -379,8 +376,7 @@
             "System.Xml.XPath.XDocument": "(,5.0.32767]"
           }
         },
-        "net10.0-ios": {
-          "framework": "net10.0-ios26.5",
+        "net10.0-ios26.5": {
           "targetAlias": "net10.0-ios",
           "dependencies": {
             "CommunityToolkit.Maui": {
@@ -710,6 +706,12 @@
         }
       },
       "runtimes": {
+        "android-arm64": {
+          "#import": []
+        },
+        "android-x64": {
+          "#import": []
+        },
         "iossimulator-arm64": {
           "#import": []
         }
