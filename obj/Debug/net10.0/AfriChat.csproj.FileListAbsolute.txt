@@ -1,0 +1,5 @@
+/Users/wmueze/code/AfriChat/obj/Debug/net10.0/AfriChat.csproj.AssemblyReference.cache
+/Users/wmueze/code/AfriChat/obj/Debug/net10.0/AfriChat.GeneratedMSBuildEditorConfig.editorconfig
+/Users/wmueze/code/AfriChat/obj/Debug/net10.0/AfriChat.AssemblyInfoInputs.cache
+/Users/wmueze/code/AfriChat/obj/Debug/net10.0/AfriChat.AssemblyInfo.cs
+/Users/wmueze/code/AfriChat/obj/Debug/net10.0/AfriChat.csproj.CoreCompileInputs.cache

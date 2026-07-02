@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <_PostProcessingItem Include="AfriChat.app/Frameworks/libSkiaSharp.framework/libSkiaSharp">
+      <TargetDirectory>bin/Debug/net10.0-ios/ios-arm64/publish/../AfriChat.app/Frameworks/libSkiaSharp.framework</TargetDirectory>
+      <RelativePath>Frameworks/libSkiaSharp.framework</RelativePath>
+      <BCSymbolMapName>libSkiaSharp.bcsymbolmap</BCSymbolMapName>
+      <ItemSourcePath>/Users/wmueze/.nuget/packages/skiasharp.nativeassets.ios/4.148.0/runtimes/ios/native/libSkiaSharp.framework/libSkiaSharp</ItemSourcePath>
+      <PublishFolderType>AppleFramework</PublishFolderType>
+      <NoDSymUtil>false</NoDSymUtil>
+      <dSYMSourcePath>/Users/wmueze/.nuget/packages/skiasharp.nativeassets.ios/4.148.0/runtimes/ios/native/libSkiaSharp.framework.dSYM</dSYMSourcePath>
+      <dSYMSourcePathExists>false</dSYMSourcePathExists>
+      <NoSymbolStrip>true</NoSymbolStrip>
+      <dSYMInfoPlistRelativePath>libSkiaSharp.framework.dSYM\Contents\Info.plist</dSYMInfoPlistRelativePath>
+      <SourceDirectory>/Users/wmueze/.nuget/packages/skiasharp.nativeassets.ios/4.148.0/runtimes/ios/native/libSkiaSharp.framework/</SourceDirectory>
+      <DSymName>libSkiaSharp.framework.dSYM</DSymName>
+      <Kind>Framework</Kind>
+      <SourceProjectPath>/Users/wmueze/code/AfriChat</SourceProjectPath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </_PostProcessingItem>
+    <_PostProcessingItem Include="AfriChat.app/Frameworks/libSkiaSharp.framework/libSkiaSharp">
+      <TargetDirectory>bin/Debug/net10.0-ios/ios-arm64/publish/../AfriChat.app/Frameworks/libSkiaSharp.framework</TargetDirectory>
+      <RelativePath>Frameworks\/libSkiaSharp.framework</RelativePath>
+      <BCSymbolMapName>libSkiaSharp.bcsymbolmap</BCSymbolMapName>
+      <ItemSourcePath>/Users/wmueze/.nuget/packages/skiasharp.nativeassets.ios/4.148.0/runtimes/ios/native/libSkiaSharp.framework/libSkiaSharp</ItemSourcePath>
+      <PublishFolderType>AppleFramework</PublishFolderType>
+      <NoDSymUtil>false</NoDSymUtil>
+      <dSYMSourcePath>/Users/wmueze/.nuget/packages/skiasharp.nativeassets.ios/4.148.0/runtimes/ios/native/libSkiaSharp.framework.dSYM</dSYMSourcePath>
+      <dSYMSourcePathExists>false</dSYMSourcePathExists>
+      <NoSymbolStrip>true</NoSymbolStrip>
+      <dSYMInfoPlistRelativePath>libSkiaSharp.framework.dSYM\Contents\Info.plist</dSYMInfoPlistRelativePath>
+      <SourceDirectory>/Users/wmueze/.nuget/packages/skiasharp.nativeassets.ios/4.148.0/runtimes/ios/native/libSkiaSharp.framework/</SourceDirectory>
+      <DSymName>libSkiaSharp.framework.dSYM</DSymName>
+      <Kind>Framework</Kind>
+      <OriginalItemSpec>/Users/wmueze/.nuget/packages/skiasharp.nativeassets.ios/4.148.0/runtimes/ios/native/libSkiaSharp.framework/libSkiaSharp</OriginalItemSpec>
+      <SourceProjectPath>/Users/wmueze/code/AfriChat</SourceProjectPath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </_PostProcessingItem>
+    <_PostProcessingItem Include="AfriChat.app/AfriChat">
+      <IsAppExtension>false</IsAppExtension>
+      <BCSymbolMapName>AfriChat.bcsymbolmap</BCSymbolMapName>
+      <NoDSymUtil>false</NoDSymUtil>
+      <dSYMSourcePathExists>false</dSYMSourcePathExists>
+      <NoSymbolStrip>true</NoSymbolStrip>
+      <dSYMInfoPlistRelativePath>AfriChat.app.dSYM\Contents\Info.plist</dSYMInfoPlistRelativePath>
+      <SymbolFile>/Users/wmueze/code/AfriChat/obj/Debug/net10.0-ios/ios-arm64/mtouch-symbols.list</SymbolFile>
+      <DSymName>AfriChat.app.dSYM</DSymName>
+      <SourceProjectPath>/Users/wmueze/code/AfriChat</SourceProjectPath>
+      <IsXPCService></IsXPCService>
+    </_PostProcessingItem>
+  </ItemGroup>
+</Project>

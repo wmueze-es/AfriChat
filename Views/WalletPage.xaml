@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:AfriChat.ViewModels"
+             xmlns:models="clr-namespace:AfriChat.Models"
+             x:Class="AfriChat.Views.WalletPage"
+             x:DataType="vm:WalletViewModel">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="0">
+
+            <!-- Header / Balance Card -->
+            <Grid Padding="20,56,20,28"
+                  BackgroundColor="{StaticResource AfriGreen}">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="AfriPay Wallet" FontFamily="PoppinsRegular" FontSize="13"
+                           TextColor="#B7DCE2" />
+                    <Label Text="{Binding BalanceDisplay}" FontFamily="PoppinsSemiBold" FontSize="36"
+                           TextColor="White" />
+                    <Label Text="Available balance" FontFamily="PoppinsRegular" FontSize="12"
+                           TextColor="#B7DCE2" Margin="0,0,0,20" />
+
+                    <!-- Action Buttons -->
+                    <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="10">
+                        <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" Spacing="6">
+                            <Frame WidthRequest="52" HeightRequest="52" CornerRadius="26" Padding="0"
+                                   BackgroundColor="#33FFFFFF" HasShadow="False" BorderColor="Transparent"
+                                   HorizontalOptions="Center">
+                                <Image Source="icon_send_white.png" WidthRequest="24" HeightRequest="24"
+                                       HorizontalOptions="Center" VerticalOptions="Center" />
+                            </Frame>
+                            <Label Text="Send" FontSize="12" TextColor="White" HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center" Spacing="6">
+                            <Frame WidthRequest="52" HeightRequest="52" CornerRadius="26" Padding="0"
+                                   BackgroundColor="#33FFFFFF" HasShadow="False" BorderColor="Transparent"
+                                   HorizontalOptions="Center">
+                                <Image Source="icon_receive_white.png" WidthRequest="24" HeightRequest="24"
+                                       HorizontalOptions="Center" VerticalOptions="Center" />
+                            </Frame>
+                            <Label Text="Receive" FontSize="12" TextColor="White" HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center" Spacing="6">
+                            <Frame WidthRequest="52" HeightRequest="52" CornerRadius="26" Padding="0"
+                                   BackgroundColor="#33FFFFFF" HasShadow="False" BorderColor="Transparent"
+                                   HorizontalOptions="Center">
+                                <Image Source="icon_topup_white.png" WidthRequest="24" HeightRequest="24"
+                                       HorizontalOptions="Center" VerticalOptions="Center" />
+                            </Frame>
+                            <Label Text="Top up" FontSize="12" TextColor="White" HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Grid.Column="3" HorizontalOptions="Center" Spacing="6">
+                            <Frame WidthRequest="52" HeightRequest="52" CornerRadius="26" Padding="0"
+                                   BackgroundColor="#33FFFFFF" HasShadow="False" BorderColor="Transparent"
+                                   HorizontalOptions="Center">
+                                <Image Source="icon_convert_white.png" WidthRequest="24" HeightRequest="24"
+                                       HorizontalOptions="Center" VerticalOptions="Center" />
+                            </Frame>
+                            <Label Text="Convert" FontSize="12" TextColor="White" HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </VerticalStackLayout>
+            </Grid>
+
+            <!-- FX Rates -->
+            <VerticalStackLayout Padding="16,20,16,0" Spacing="12"
+                                 BackgroundColor="{AppThemeBinding Light={StaticResource PageBackgroundLight}, Dark={StaticResource PageBackgroundDark}}">
+
+                <Label Text="Exchange rates (from KES)" Style="{StaticResource TitleStyle}" />
+
+                <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                    <HorizontalStackLayout Spacing="10">
+                        <Frame Style="{StaticResource CardStyle}" WidthRequest="110" Padding="12">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="🇺🇬 UGX" FontFamily="PoppinsMedium" FontSize="13"
+                                       TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}" />
+                                <Label Text="29.4" FontFamily="PoppinsSemiBold" FontSize="18" TextColor="{StaticResource AfriGreen}" />
+                                <Label Text="per KES" FontSize="11" TextColor="{StaticResource Gray400}" />
+                            </VerticalStackLayout>
+                        </Frame>
+                        <Frame Style="{StaticResource CardStyle}" WidthRequest="110" Padding="12">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="🇳🇬 NGN" FontFamily="PoppinsMedium" FontSize="13"
+                                       TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}" />
+                                <Label Text="5.2" FontFamily="PoppinsSemiBold" FontSize="18" TextColor="{StaticResource AfriGreen}" />
+                                <Label Text="per KES" FontSize="11" TextColor="{StaticResource Gray400}" />
+                            </VerticalStackLayout>
+                        </Frame>
+                        <Frame Style="{StaticResource CardStyle}" WidthRequest="110" Padding="12">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="🇬🇭 GHS" FontFamily="PoppinsMedium" FontSize="13"
+                                       TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}" />
+                                <Label Text="0.048" FontFamily="PoppinsSemiBold" FontSize="18" TextColor="{StaticResource AfriGreen}" />
+                                <Label Text="per KES" FontSize="11" TextColor="{StaticResource Gray400}" />
+                            </VerticalStackLayout>
+                        </Frame>
+                        <Frame Style="{StaticResource CardStyle}" WidthRequest="110" Padding="12">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="🇿🇦 ZAR" FontFamily="PoppinsMedium" FontSize="13"
+                                       TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}" />
+                                <Label Text="0.137" FontFamily="PoppinsSemiBold" FontSize="18" TextColor="{StaticResource AfriGreen}" />
+                                <Label Text="per KES" FontSize="11" TextColor="{StaticResource Gray400}" />
+                            </VerticalStackLayout>
+                        </Frame>
+                        <Frame Style="{StaticResource CardStyle}" WidthRequest="110" Padding="12">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="🇹🇿 TZS" FontFamily="PoppinsMedium" FontSize="13"
+                                       TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}" />
+                                <Label Text="17.8" FontFamily="PoppinsSemiBold" FontSize="18" TextColor="{StaticResource AfriGreen}" />
+                                <Label Text="per KES" FontSize="11" TextColor="{StaticResource Gray400}" />
+                            </VerticalStackLayout>
+                        </Frame>
+                    </HorizontalStackLayout>
+                </ScrollView>
+
+                <!-- Converter -->
+                <Frame Style="{StaticResource CardStyle}" Margin="0,8,0,0">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="Quick converter" Style="{StaticResource TitleStyle}" />
+                        <Grid ColumnDefinitions="*,Auto,*" ColumnSpacing="8">
+                            <Frame Grid.Column="0" BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}"
+                                   BorderColor="{AppThemeBinding Light={StaticResource BorderLight}, Dark={StaticResource BorderDark}}"
+                                   CornerRadius="10" Padding="10,8" HasShadow="False">
+                                <Entry Placeholder="Amount" Keyboard="Numeric"
+                                       Text="{Binding ConvertAmount}" />
+                            </Frame>
+                            <Label Grid.Column="1" Text="→" VerticalOptions="Center"
+                                   TextColor="{StaticResource Gray400}" FontSize="20" />
+                            <Frame Grid.Column="2" BackgroundColor="{AppThemeBinding Light={StaticResource AfriGreenLight}, Dark={StaticResource AfriGreenDark}}"
+                                   BorderColor="Transparent" CornerRadius="10" Padding="10,8" HasShadow="False">
+                                <Label Text="{Binding ConvertedAmount, StringFormat='{0:N2}'}"
+                                       FontFamily="PoppinsMedium" TextColor="{StaticResource AfriGreen}" />
+                            </Frame>
+                        </Grid>
+                        <Button Text="Convert KES → UGX" Style="{StaticResource PrimaryButtonStyle}"
+                                Command="{Binding ConvertCommand}" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Transaction History -->
+                <Label Text="Recent transactions" Style="{StaticResource TitleStyle}" Margin="0,8,0,0" />
+
+                <BindableLayout.ItemsSource>
+                    <Binding Path="Wallet.Transactions" />
+                </BindableLayout.ItemsSource>
+
+                <CollectionView ItemsSource="{Binding Wallet.Transactions}" HeightRequest="300">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:WalletTransaction">
+                            <Grid Padding="0,10" ColumnDefinitions="40,*,Auto">
+                                <Frame Grid.Column="0" WidthRequest="36" HeightRequest="36" CornerRadius="18"
+                                       BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}"
+                                       Padding="0" HasShadow="False" BorderColor="Transparent" IsClippedToBounds="True">
+                                    <Label Text="{Binding IsCredit, Converter={StaticResource CreditEmojiConverter}}"
+                                           HorizontalOptions="Center" VerticalOptions="Center" FontSize="16" />
+                                </Frame>
+                                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2" Margin="10,0">
+                                    <Label Text="{Binding Description}" FontFamily="PoppinsMedium" FontSize="14"
+                                           TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}" />
+                                    <Label Text="{Binding Date, StringFormat='{0:MMM dd, yyyy}'}"
+                                           FontSize="12" TextColor="{StaticResource Gray400}" />
+                                </VerticalStackLayout>
+                                <Label Grid.Column="2" Text="{Binding AmountDisplay}"
+                                       FontFamily="PoppinsMedium" FontSize="14"
+                                       TextColor="{Binding AmountColor}"
+                                       VerticalOptions="Center" />
+                                <BoxView Grid.ColumnSpan="3" HeightRequest="0.5" VerticalOptions="End"
+                                         Color="{AppThemeBinding Light={StaticResource BorderLight}, Dark={StaticResource BorderDark}}" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <BoxView HeightRequest="20" Color="Transparent" />
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:AfriChat.ViewModels"
+             xmlns:models="clr-namespace:AfriChat.Models"
+             x:Class="AfriChat.Views.ChatsPage"
+             x:DataType="vm:ChatsViewModel">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="+" Command="{Binding NewChatCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <Grid RowDefinitions="Auto,Auto,*">
+
+        <!-- Header -->
+        <Grid Grid.Row="0" Padding="16,52,16,12" ColumnDefinitions="*,Auto"
+              BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">
+            <VerticalStackLayout Grid.Column="0">
+                <Label Text="AfriChat" Style="{StaticResource HeadlineStyle}" />
+                <Label Text="Connecting Africa, securely 🔒"
+                       Style="{StaticResource CaptionStyle}" Margin="0,2,0,0" />
+            </VerticalStackLayout>
+            <Frame Grid.Column="1" BackgroundColor="{StaticResource AfriGreenLight}"
+                   CornerRadius="20" Padding="8,4" HasShadow="False" BorderColor="Transparent">
+                <Label Text="🟢 Online" FontSize="12" TextColor="{StaticResource AfriGreenDark}"
+                       FontFamily="PoppinsMedium" />
+            </Frame>
+        </Grid>
+
+        <!-- Search Bar -->
+        <SearchBar Grid.Row="1" Placeholder="Search chats, people, markets…"
+                   BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}"
+                   Margin="12,0,12,8"
+                   SearchCommand="{Binding SearchCommand}"
+                   SearchCommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
+
+        <!-- Chat List -->
+        <RefreshView Grid.Row="2" Command="{Binding LoadCommand}" IsRefreshing="{Binding IsBusy}">
+            <CollectionView ItemsSource="{Binding FilteredChats}"
+                           SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Chat">
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="Mute" BackgroundColor="{StaticResource AfriGold}"
+                                               IconImageSource="icon_mute.png" />
+                                    <SwipeItem Text="Delete" BackgroundColor="{StaticResource AfriRed}"
+                                               IconImageSource="icon_delete.png" />
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+
+                            <Grid Padding="14,10" ColumnDefinitions="48,*,Auto"
+                                  ColumnSpacing="12"
+                                  BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">
+
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ChatsViewModel}}, Path=OpenChatCommand}"
+                                        CommandParameter="{Binding .}" />
+                                </Grid.GestureRecognizers>
+
+                                <!-- Avatar -->
+                                <Frame Grid.Column="0" WidthRequest="46" HeightRequest="46"
+                                       CornerRadius="23" Padding="0" HasShadow="False" IsClippedToBounds="True"
+                                       BackgroundColor="{StaticResource AfriGreenLight}"
+                                       BorderColor="Transparent">
+                                    <Label Text="{Binding AvatarInitials}"
+                                           HorizontalOptions="Center" VerticalOptions="Center"
+                                           FontFamily="PoppinsSemiBold" FontSize="16"
+                                           TextColor="{StaticResource AfriGreenDark}" />
+                                </Frame>
+
+                                <!-- Meta -->
+                                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="3">
+                                    <Grid ColumnDefinitions="*,Auto">
+                                        <Label Grid.Column="0" Text="{Binding Name}"
+                                               FontFamily="PoppinsMedium" FontSize="15"
+                                               TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}"
+                                               LineBreakMode="TailTruncation" />
+                                        <Label Grid.Column="1"
+                                               Text="{Binding UpdatedAt, StringFormat='{0:HH:mm}'}"
+                                               FontFamily="PoppinsRegular" FontSize="11"
+                                               TextColor="{StaticResource Gray400}" />
+                                    </Grid>
+                                    <Grid ColumnDefinitions="*,Auto">
+                                        <Label Grid.Column="0" Text="{Binding LastMessage.Text}"
+                                               FontFamily="PoppinsRegular" FontSize="13"
+                                               TextColor="{StaticResource Gray500}"
+                                               LineBreakMode="TailTruncation" MaxLines="1" />
+                                        <Frame Grid.Column="1"
+                                               BackgroundColor="{StaticResource AfriGreen}"
+                                               CornerRadius="10" Padding="5,2" HasShadow="False"
+                                               BorderColor="Transparent"
+                                               IsVisible="{Binding UnreadCount, Converter={StaticResource IntToBoolConverter}}">
+                                            <Label Text="{Binding UnreadCount}" FontSize="11"
+                                                   TextColor="White" FontFamily="PoppinsMedium" />
+                                        </Frame>
+                                    </Grid>
+                                </VerticalStackLayout>
+
+                                <!-- Separator -->
+                                <BoxView Grid.Column="0" Grid.ColumnSpan="3"
+                                         HeightRequest="0.5" VerticalOptions="End"
+                                         Color="{AppThemeBinding Light={StaticResource BorderLight}, Dark={StaticResource BorderDark}}" />
+                            </Grid>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="12" Padding="40">
+                        <Label Text="💬" FontSize="48" HorizontalOptions="Center" />
+                        <Label Text="No chats yet" Style="{StaticResource TitleStyle}" HorizontalOptions="Center" />
+                        <Label Text="Start a conversation or join a market group." Style="{StaticResource CaptionStyle}" HorizontalOptions="Center" HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
+            </CollectionView>
+        </RefreshView>
+    </Grid>
+</ContentPage>

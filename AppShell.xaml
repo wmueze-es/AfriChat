@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:AfriChat.Views"
+       x:Class="AfriChat.AppShell"
+       Shell.NavBarIsVisible="False"
+       FlyoutBehavior="Disabled">
+
+    <Shell.Resources>
+        <Style TargetType="TabBar">
+            <Setter Property="Shell.TabBarBackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}" />
+            <Setter Property="Shell.TabBarForegroundColor" Value="{StaticResource AfriGreen}" />
+            <Setter Property="Shell.TabBarUnselectedColor" Value="{StaticResource Gray400}" />
+            <Setter Property="Shell.TabBarTitleColor" Value="{StaticResource AfriGreen}" />
+        </Style>
+    </Shell.Resources>
+
+    <TabBar>
+        <ShellContent Title="Chats"
+                      Icon="icon_chat.png"
+                      ContentTemplate="{DataTemplate views:ChatsPage}"
+                      Route="ChatsPage" />
+
+        <ShellContent Title="Market"
+                      Icon="icon_market.png"
+                      ContentTemplate="{DataTemplate views:MarketplacePage}"
+                      Route="MarketplacePage" />
+
+        <ShellContent Title="Borders"
+                      Icon="icon_border.png"
+                      ContentTemplate="{DataTemplate views:BorderAlertsPage}"
+                      Route="BorderAlertsPage" />
+
+        <ShellContent Title="Wallet"
+                      Icon="icon_wallet.png"
+                      ContentTemplate="{DataTemplate views:WalletPage}"
+                      Route="WalletPage" />
+
+        <ShellContent Title="Profile"
+                      Icon="icon_profile.png"
+                      ContentTemplate="{DataTemplate views:ProfilePage}"
+                      Route="ProfilePage" />
+    </TabBar>
+
+</Shell>

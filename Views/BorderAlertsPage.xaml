@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:AfriChat.ViewModels"
+             xmlns:models="clr-namespace:AfriChat.Models"
+             x:Class="AfriChat.Views.BorderAlertsPage"
+             x:DataType="vm:BorderAlertsViewModel">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- Header -->
+        <VerticalStackLayout Grid.Row="0" Padding="16,56,16,16"
+                             BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">
+            <BoxView HeightRequest="0.5" Color="{AppThemeBinding Light={StaticResource BorderLight}, Dark={StaticResource BorderDark}}" VerticalOptions="End" />
+            <Label Text="Border Watch" Style="{StaticResource HeadlineStyle}" />
+            <Label Text="Real-time crossing reports from traders" Style="{StaticResource CaptionStyle}" Margin="0,2,0,0" />
+        </VerticalStackLayout>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="0" Padding="16,12,16,30">
+
+                <!-- Active Alerts -->
+                <Label Text="Active alerts" Style="{StaticResource TitleStyle}" Margin="0,0,0,10" />
+
+                <CollectionView ItemsSource="{Binding Alerts}" SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:BorderAlert">
+                            <Frame Margin="0,0,0,10" CornerRadius="14" Padding="14" HasShadow="False"
+                                   BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource CardBackgroundDark}}"
+                                   BorderColor="{AppThemeBinding Light={StaticResource BorderLight}, Dark={StaticResource BorderDark}}">
+                                <Grid ColumnDefinitions="4,*,Auto" ColumnSpacing="12">
+
+                                    <!-- Severity strip -->
+                                    <BoxView Grid.Column="0" CornerRadius="2"
+                                             Color="{Binding SeverityColor}" />
+
+                                    <VerticalStackLayout Grid.Column="1" Spacing="5">
+                                        <Grid ColumnDefinitions="*,Auto">
+                                            <Label Grid.Column="0" Text="{Binding BorderName}"
+                                                   FontFamily="PoppinsSemiBold" FontSize="15"
+                                                   TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}" />
+                                            <Label Grid.Column="1" Text="{Binding TimeAgo}"
+                                                   FontSize="11" TextColor="{StaticResource Gray400}" />
+                                        </Grid>
+                                        <Label Text="{Binding CrossingDisplay}" FontSize="12"
+                                               TextColor="{StaticResource Gray500}" />
+                                        <HorizontalStackLayout Spacing="6">
+                                            <Label Text="{Binding DelayIcon}" FontSize="14" />
+                                            <Label Text="{Binding DelayType}" FontSize="13"
+                                                   TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}" />
+                                            <Label Text="·" TextColor="{StaticResource Gray400}" />
+                                            <Label Text="{Binding EstimatedWait, StringFormat='~{0}'}"
+                                                   FontFamily="PoppinsMedium" FontSize="13"
+                                                   TextColor="{Binding SeverityColor}" />
+                                        </HorizontalStackLayout>
+                                        <Label Text="{Binding Description}" FontSize="12"
+                                               TextColor="{StaticResource Gray500}" MaxLines="2"
+                                               LineBreakMode="TailTruncation" />
+                                        <HorizontalStackLayout Spacing="8">
+                                            <Label Text="{Binding ConfirmationCount, StringFormat='✓ {0} traders confirmed'}"
+                                                   FontSize="11" TextColor="{StaticResource AfriGreenMid}" />
+                                            <Label Text="·" TextColor="{StaticResource Gray400}" />
+                                            <Label Text="{Binding ReportedBy, StringFormat='by {0}'}"
+                                                   FontSize="11" TextColor="{StaticResource Gray400}" />
+                                        </HorizontalStackLayout>
+                                        <Button Text="Confirm this report"
+                                                BackgroundColor="Transparent"
+                                                TextColor="{StaticResource AfriGreen}"
+                                                BorderColor="{StaticResource AfriGreen}" BorderWidth="0.5"
+                                                CornerRadius="8" HeightRequest="32" FontSize="12"
+                                                HorizontalOptions="Start" Padding="12,0"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:BorderAlertsViewModel}}, Path=ConfirmAlertCommand}"
+                                                CommandParameter="{Binding .}" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Report New Alert -->
+                <Frame Style="{StaticResource CardStyle}" Margin="0,16,0,0"
+                       BorderColor="{StaticResource AfriRed}">
+                    <VerticalStackLayout Spacing="14">
+                        <HorizontalStackLayout Spacing="8">
+                            <Label Text="⚠️" FontSize="20" />
+                            <Label Text="Report a crossing delay" FontFamily="PoppinsSemiBold" FontSize="15"
+                                   TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}"
+                                   VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Border post" Style="{StaticResource CaptionStyle}" />
+                            <Frame BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}"
+                                   BorderColor="{AppThemeBinding Light={StaticResource BorderLight}, Dark={StaticResource BorderDark}}"
+                                   CornerRadius="10" Padding="10,4" HasShadow="False">
+                                <Picker Title="Select border post" ItemsSource="{Binding BorderPosts}"
+                                        SelectedItem="{Binding SelectedBorder}" />
+                            </Frame>
+                        </VerticalStackLayout>
+
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                            <VerticalStackLayout Grid.Column="0" Spacing="4">
+                                <Label Text="Delay type" Style="{StaticResource CaptionStyle}" />
+                                <Frame BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}"
+                                       BorderColor="{AppThemeBinding Light={StaticResource BorderLight}, Dark={StaticResource BorderDark}}"
+                                       CornerRadius="10" Padding="10,4" HasShadow="False">
+                                    <Picker ItemsSource="{Binding DelayTypes}" SelectedItem="{Binding SelectedDelayType}" />
+                                </Frame>
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="1" Spacing="4">
+                                <Label Text="Wait time" Style="{StaticResource CaptionStyle}" />
+                                <Frame BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}"
+                                       BorderColor="{AppThemeBinding Light={StaticResource BorderLight}, Dark={StaticResource BorderDark}}"
+                                       CornerRadius="10" Padding="10,4" HasShadow="False">
+                                    <Picker ItemsSource="{Binding WaitTimes}" SelectedItem="{Binding SelectedWaitTime}" />
+                                </Frame>
+                            </VerticalStackLayout>
+                        </Grid>
+
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="What are you seeing?" Style="{StaticResource CaptionStyle}" />
+                            <Frame BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}"
+                                   BorderColor="{AppThemeBinding Light={StaticResource BorderLight}, Dark={StaticResource BorderDark}}"
+                                   CornerRadius="10" Padding="10,8" HasShadow="False">
+                                <Editor Placeholder="Describe conditions at the crossing…"
+                                        Text="{Binding AlertDescription}"
+                                        HeightRequest="80" BackgroundColor="Transparent"
+                                        FontFamily="PoppinsRegular" FontSize="14" />
+                            </Frame>
+                        </VerticalStackLayout>
+
+                        <Button Text="Submit Border Alert" Style="{StaticResource DangerButtonStyle}"
+                                Command="{Binding SubmitAlertCommand}" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <BoxView HeightRequest="20" Color="Transparent" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

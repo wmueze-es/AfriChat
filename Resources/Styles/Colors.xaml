@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- AfriChat Brand Palette -->
+    <Color x:Key="AfriGreen">#087397</Color>
+    <Color x:Key="AfriGreenMid">#4F91A8</Color>
+    <Color x:Key="AfriGreenLight">#93C7D0</Color>
+    <Color x:Key="AfriGreenDark">#0B759A</Color>
+    <Color x:Key="AfriGold">#93C7D0</Color>
+    <Color x:Key="AfriGoldLight">#ECE6DB</Color>
+    <Color x:Key="AfriRed">#4F91A8</Color>
+    <Color x:Key="AfriRedLight">#B7DCE2</Color>
+    <Color x:Key="AfriBlue">#0B759A</Color>
+    <Color x:Key="AfriBluLight">#D7E9EC</Color>
+
+    <!-- Neutrals -->
+    <Color x:Key="White">#FFFFFF</Color>
+    <Color x:Key="Gray50">#ECE6DB</Color>
+    <Color x:Key="Gray100">#E5DED2</Color>
+    <Color x:Key="Gray200">#D8D0C4</Color>
+    <Color x:Key="Gray300">#B7DCE2</Color>
+    <Color x:Key="Gray400">#8DBFCA</Color>
+    <Color x:Key="Gray500">#4F91A8</Color>
+    <Color x:Key="Gray600">#2F6E84</Color>
+    <Color x:Key="Gray700">#234E5F</Color>
+    <Color x:Key="Gray800">#183946</Color>
+    <Color x:Key="Gray900">#102B35</Color>
+
+    <!-- Semantic -->
+    <Color x:Key="Success">#087397</Color>
+    <Color x:Key="Warning">#93C7D0</Color>
+    <Color x:Key="Danger">#4F91A8</Color>
+    <Color x:Key="Info">#0B759A</Color>
+
+    <!-- Chat bubbles -->
+    <Color x:Key="BubbleOut">#087397</Color>
+    <Color x:Key="BubbleOutText">#FFFFFF</Color>
+    <Color x:Key="BubbleIn">#ECE6DB</Color>
+    <Color x:Key="BubbleInDark">#183946</Color>
+    <Color x:Key="BubbleInText">#102B35</Color>
+
+    <!-- AppTheme -->
+    <Color x:Key="PageBackgroundLight">#ECE6DB</Color>
+    <Color x:Key="PageBackgroundDark">#102B35</Color>
+    <Color x:Key="CardBackgroundLight">#FFFFFF</Color>
+    <Color x:Key="CardBackgroundDark">#183946</Color>
+    <Color x:Key="SurfaceLight">#E5DED2</Color>
+    <Color x:Key="SurfaceDark">#173643</Color>
+    <Color x:Key="TextPrimaryLight">#0B759A</Color>
+    <Color x:Key="TextPrimaryDark">#ECE6DB</Color>
+    <Color x:Key="TextSecondaryLight">#4F91A8</Color>
+    <Color x:Key="TextSecondaryDark">#B7DCE2</Color>
+    <Color x:Key="BorderLight">#D8D0C4</Color>
+    <Color x:Key="BorderDark">#234E5F</Color>
+    <Color x:Key="NavBarLight">#FFFFFF</Color>
+    <Color x:Key="NavBarDark">#173643</Color>
+
+</ResourceDictionary>

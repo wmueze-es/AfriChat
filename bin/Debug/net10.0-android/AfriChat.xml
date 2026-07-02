@@ -1,0 +1,708 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AfriChat</name>
+    </assembly>
+    <members>
+        <member name="T:AfriChat.Controls.MessageBubbleView">
+            <summary>
+            Custom control that renders different bubble types:
+            Text, MoneyTransfer card, ProductListing card, BorderAlert card.
+            </summary>
+        </member>
+        <member name="T:AfriChat.Services.EncryptionService">
+            <summary>
+            Signal-Protocol-inspired end-to-end encryption using AES-256-GCM + RSA key exchange.
+            In production replace with libsignal-protocol-dotnet.
+            </summary>
+        </member>
+        <member name="T:AfriChat.Services.MessagingService">
+            <summary>Mock messaging service — replace with WebSocket/SignalR in production.</summary>
+        </member>
+        <member name="T:AfriChat.ViewModels.BaseViewModel">
+            <inheritdoc/>
+        </member>
+        <member name="P:AfriChat.ViewModels.BaseViewModel.IsBusy">
+            <inheritdoc cref="F:AfriChat.ViewModels.BaseViewModel._isBusy"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.BaseViewModel.Title">
+            <inheritdoc cref="F:AfriChat.ViewModels.BaseViewModel._title"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.BaseViewModel.ErrorMessage">
+            <inheritdoc cref="F:AfriChat.ViewModels.BaseViewModel._errorMessage"/>
+        </member>
+        <member name="T:AfriChat.ViewModels.ChatsViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:AfriChat.ViewModels.ChatsViewModel.Chats">
+            <inheritdoc cref="F:AfriChat.ViewModels.ChatsViewModel._chats"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.ChatsViewModel.FilteredChats">
+            <inheritdoc cref="F:AfriChat.ViewModels.ChatsViewModel._filteredChats"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.ChatsViewModel.SearchQuery">
+            <inheritdoc cref="F:AfriChat.ViewModels.ChatsViewModel._searchQuery"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.ChatsViewModel.CurrentUser">
+            <inheritdoc cref="F:AfriChat.ViewModels.ChatsViewModel._currentUser"/>
+        </member>
+        <member name="F:AfriChat.ViewModels.ChatsViewModel.loadCommand">
+            <summary>The backing field for <see cref="P:AfriChat.ViewModels.ChatsViewModel.LoadCommand"/>.</summary>
+        </member>
+        <member name="P:AfriChat.ViewModels.ChatsViewModel.LoadCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:AfriChat.ViewModels.ChatsViewModel.LoadAsync"/>.</summary>
+        </member>
+        <member name="F:AfriChat.ViewModels.ChatsViewModel.searchCommand">
+            <summary>The backing field for <see cref="P:AfriChat.ViewModels.ChatsViewModel.SearchCommand"/>.</summary>
+        </member>
+        <member name="P:AfriChat.ViewModels.ChatsViewModel.SearchCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:AfriChat.ViewModels.ChatsViewModel.Search(System.String)"/>.</summary>
+        </member>
+        <member name="F:AfriChat.ViewModels.ChatsViewModel.openChatCommand">
+            <summary>The backing field for <see cref="P:AfriChat.ViewModels.ChatsViewModel.OpenChatCommand"/>.</summary>
+        </member>
+        <member name="P:AfriChat.ViewModels.ChatsViewModel.OpenChatCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:AfriChat.ViewModels.ChatsViewModel.OpenChatAsync(AfriChat.Models.Chat)"/>.</summary>
+        </member>
+        <member name="F:AfriChat.ViewModels.ChatsViewModel.newChatCommand">
+            <summary>The backing field for <see cref="P:AfriChat.ViewModels.ChatsViewModel.NewChatCommand"/>.</summary>
+        </member>
+        <member name="P:AfriChat.ViewModels.ChatsViewModel.NewChatCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:AfriChat.ViewModels.ChatsViewModel.NewChatAsync"/>.</summary>
+        </member>
+        <member name="T:AfriChat.ViewModels.ChatDetailViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:AfriChat.ViewModels.ChatDetailViewModel.ChatId">
+            <inheritdoc cref="F:AfriChat.ViewModels.ChatDetailViewModel._chatId"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.ChatDetailViewModel.ChatName">
+            <inheritdoc cref="F:AfriChat.ViewModels.ChatDetailViewModel._chatName"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.ChatDetailViewModel.Messages">
+            <inheritdoc cref="F:AfriChat.ViewModels.ChatDetailViewModel._messages"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.ChatDetailViewModel.MessageText">
+            <inheritdoc cref="F:AfriChat.ViewModels.ChatDetailViewModel._messageText"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.ChatDetailViewModel.IsEncrypted">
+            <inheritdoc cref="F:AfriChat.ViewModels.ChatDetailViewModel._isEncrypted"/>
+        </member>
+        <member name="F:AfriChat.ViewModels.ChatDetailViewModel.loadMessagesCommand">
+            <summary>The backing field for <see cref="P:AfriChat.ViewModels.ChatDetailViewModel.LoadMessagesCommand"/>.</summary>
+        </member>
+        <member name="P:AfriChat.ViewModels.ChatDetailViewModel.LoadMessagesCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:AfriChat.ViewModels.ChatDetailViewModel.LoadMessagesAsync"/>.</summary>
+        </member>
+        <member name="F:AfriChat.ViewModels.ChatDetailViewModel.sendMessageCommand">
+            <summary>The backing field for <see cref="P:AfriChat.ViewModels.ChatDetailViewModel.SendMessageCommand"/>.</summary>
+        </member>
+        <member name="P:AfriChat.ViewModels.ChatDetailViewModel.SendMessageCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:AfriChat.ViewModels.ChatDetailViewModel.SendMessageAsync"/>.</summary>
+        </member>
+        <member name="F:AfriChat.ViewModels.ChatDetailViewModel.openSendMoneyCommand">
+            <summary>The backing field for <see cref="P:AfriChat.ViewModels.ChatDetailViewModel.OpenSendMoneyCommand"/>.</summary>
+        </member>
+        <member name="P:AfriChat.ViewModels.ChatDetailViewModel.OpenSendMoneyCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:AfriChat.ViewModels.ChatDetailViewModel.OpenSendMoneyAsync"/>.</summary>
+        </member>
+        <member name="F:AfriChat.ViewModels.ChatDetailViewModel.reportBorderAlertCommand">
+            <summary>The backing field for <see cref="P:AfriChat.ViewModels.ChatDetailViewModel.ReportBorderAlertCommand"/>.</summary>
+        </member>
+        <member name="P:AfriChat.ViewModels.ChatDetailViewModel.ReportBorderAlertCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:AfriChat.ViewModels.ChatDetailViewModel.ReportBorderAlertAsync"/>.</summary>
+        </member>
+        <member name="T:AfriChat.ViewModels.WalletViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:AfriChat.ViewModels.WalletViewModel.Wallet">
+            <inheritdoc cref="F:AfriChat.ViewModels.WalletViewModel._wallet"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.WalletViewModel.Rates">
+            <inheritdoc cref="F:AfriChat.ViewModels.WalletViewModel._rates"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.WalletViewModel.Currencies">
+            <inheritdoc cref="F:AfriChat.ViewModels.WalletViewModel._currencies"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.WalletViewModel.ConvertAmount">
+            <inheritdoc cref="F:AfriChat.ViewModels.WalletViewModel._convertAmount"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.WalletViewModel.FromCurrency">
+            <inheritdoc cref="F:AfriChat.ViewModels.WalletViewModel._fromCurrency"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.WalletViewModel.ToCurrency">
+            <inheritdoc cref="F:AfriChat.ViewModels.WalletViewModel._toCurrency"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.WalletViewModel.ConvertedAmount">
+            <inheritdoc cref="F:AfriChat.ViewModels.WalletViewModel._convertedAmount"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.WalletViewModel.BalanceDisplay">
+            <inheritdoc cref="F:AfriChat.ViewModels.WalletViewModel._balanceDisplay"/>
+        </member>
+        <member name="F:AfriChat.ViewModels.WalletViewModel.loadCommand">
+            <summary>The backing field for <see cref="P:AfriChat.ViewModels.WalletViewModel.LoadCommand"/>.</summary>
+        </member>
+        <member name="P:AfriChat.ViewModels.WalletViewModel.LoadCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:AfriChat.ViewModels.WalletViewModel.LoadAsync"/>.</summary>
+        </member>
+        <member name="F:AfriChat.ViewModels.WalletViewModel.convertCommand">
+            <summary>The backing field for <see cref="P:AfriChat.ViewModels.WalletViewModel.ConvertCommand"/>.</summary>
+        </member>
+        <member name="P:AfriChat.ViewModels.WalletViewModel.ConvertCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:AfriChat.ViewModels.WalletViewModel.ConvertAsync"/>.</summary>
+        </member>
+        <member name="F:AfriChat.ViewModels.WalletViewModel.sendMoneyCommand">
+            <summary>The backing field for <see cref="P:AfriChat.ViewModels.WalletViewModel.SendMoneyCommand"/>.</summary>
+        </member>
+        <member name="P:AfriChat.ViewModels.WalletViewModel.SendMoneyCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:AfriChat.ViewModels.WalletViewModel.SendMoneyAsync"/>.</summary>
+        </member>
+        <member name="F:AfriChat.ViewModels.WalletViewModel.topUpCommand">
+            <summary>The backing field for <see cref="P:AfriChat.ViewModels.WalletViewModel.TopUpCommand"/>.</summary>
+        </member>
+        <member name="P:AfriChat.ViewModels.WalletViewModel.TopUpCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:AfriChat.ViewModels.WalletViewModel.TopUpAsync"/>.</summary>
+        </member>
+        <member name="T:AfriChat.ViewModels.SendMoneyViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:AfriChat.ViewModels.SendMoneyViewModel.ChatId">
+            <inheritdoc cref="F:AfriChat.ViewModels.SendMoneyViewModel._chatId"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.SendMoneyViewModel.RecipientName">
+            <inheritdoc cref="F:AfriChat.ViewModels.SendMoneyViewModel._recipientName"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.SendMoneyViewModel.RecipientId">
+            <inheritdoc cref="F:AfriChat.ViewModels.SendMoneyViewModel._recipientId"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.SendMoneyViewModel.Amount">
+            <inheritdoc cref="F:AfriChat.ViewModels.SendMoneyViewModel._amount"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.SendMoneyViewModel.SelectedCurrency">
+            <inheritdoc cref="F:AfriChat.ViewModels.SendMoneyViewModel._selectedCurrency"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.SendMoneyViewModel.Note">
+            <inheritdoc cref="F:AfriChat.ViewModels.SendMoneyViewModel._note"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.SendMoneyViewModel.EstimatedFee">
+            <inheritdoc cref="F:AfriChat.ViewModels.SendMoneyViewModel._estimatedFee"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.SendMoneyViewModel.ConvertedAmount">
+            <inheritdoc cref="F:AfriChat.ViewModels.SendMoneyViewModel._convertedAmount"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.SendMoneyViewModel.TargetCurrency">
+            <inheritdoc cref="F:AfriChat.ViewModels.SendMoneyViewModel._targetCurrency"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.SendMoneyViewModel.Currencies">
+            <inheritdoc cref="F:AfriChat.ViewModels.SendMoneyViewModel._currencies"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.SendMoneyViewModel.IsSuccess">
+            <inheritdoc cref="F:AfriChat.ViewModels.SendMoneyViewModel._isSuccess"/>
+        </member>
+        <member name="M:AfriChat.ViewModels.SendMoneyViewModel.OnAmountChanged(System.Decimal)">
+            <summary>Executes the logic for when <see cref="P:AfriChat.ViewModels.SendMoneyViewModel.Amount"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:AfriChat.ViewModels.SendMoneyViewModel.Amount"/> is changed.</remarks>
+        </member>
+        <member name="F:AfriChat.ViewModels.SendMoneyViewModel.loadCommand">
+            <summary>The backing field for <see cref="P:AfriChat.ViewModels.SendMoneyViewModel.LoadCommand"/>.</summary>
+        </member>
+        <member name="P:AfriChat.ViewModels.SendMoneyViewModel.LoadCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:AfriChat.ViewModels.SendMoneyViewModel.LoadAsync"/>.</summary>
+        </member>
+        <member name="F:AfriChat.ViewModels.SendMoneyViewModel.sendCommand">
+            <summary>The backing field for <see cref="P:AfriChat.ViewModels.SendMoneyViewModel.SendCommand"/>.</summary>
+        </member>
+        <member name="P:AfriChat.ViewModels.SendMoneyViewModel.SendCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:AfriChat.ViewModels.SendMoneyViewModel.SendAsync"/>.</summary>
+        </member>
+        <member name="T:AfriChat.ViewModels.MarketplaceViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:AfriChat.ViewModels.MarketplaceViewModel.Products">
+            <inheritdoc cref="F:AfriChat.ViewModels.MarketplaceViewModel._products"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.MarketplaceViewModel.Opportunities">
+            <inheritdoc cref="F:AfriChat.ViewModels.MarketplaceViewModel._opportunities"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.MarketplaceViewModel.ShowProducts">
+            <inheritdoc cref="F:AfriChat.ViewModels.MarketplaceViewModel._showProducts"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.MarketplaceViewModel.SearchQuery">
+            <inheritdoc cref="F:AfriChat.ViewModels.MarketplaceViewModel._searchQuery"/>
+        </member>
+        <member name="F:AfriChat.ViewModels.MarketplaceViewModel.loadCommand">
+            <summary>The backing field for <see cref="P:AfriChat.ViewModels.MarketplaceViewModel.LoadCommand"/>.</summary>
+        </member>
+        <member name="P:AfriChat.ViewModels.MarketplaceViewModel.LoadCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:AfriChat.ViewModels.MarketplaceViewModel.LoadAsync"/>.</summary>
+        </member>
+        <member name="F:AfriChat.ViewModels.MarketplaceViewModel.openProductCommand">
+            <summary>The backing field for <see cref="P:AfriChat.ViewModels.MarketplaceViewModel.OpenProductCommand"/>.</summary>
+        </member>
+        <member name="P:AfriChat.ViewModels.MarketplaceViewModel.OpenProductCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:AfriChat.ViewModels.MarketplaceViewModel.OpenProductAsync(AfriChat.Models.ProductListing)"/>.</summary>
+        </member>
+        <member name="F:AfriChat.ViewModels.MarketplaceViewModel.postListingCommand">
+            <summary>The backing field for <see cref="P:AfriChat.ViewModels.MarketplaceViewModel.PostListingCommand"/>.</summary>
+        </member>
+        <member name="P:AfriChat.ViewModels.MarketplaceViewModel.PostListingCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:AfriChat.ViewModels.MarketplaceViewModel.PostListingAsync"/>.</summary>
+        </member>
+        <member name="F:AfriChat.ViewModels.MarketplaceViewModel.toggleViewCommand">
+            <summary>The backing field for <see cref="P:AfriChat.ViewModels.MarketplaceViewModel.ToggleViewCommand"/>.</summary>
+        </member>
+        <member name="P:AfriChat.ViewModels.MarketplaceViewModel.ToggleViewCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:AfriChat.ViewModels.MarketplaceViewModel.ToggleView"/>.</summary>
+        </member>
+        <member name="T:AfriChat.ViewModels.BorderAlertsViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:AfriChat.ViewModels.BorderAlertsViewModel.Alerts">
+            <inheritdoc cref="F:AfriChat.ViewModels.BorderAlertsViewModel._alerts"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.BorderAlertsViewModel.SelectedBorderPost">
+            <inheritdoc cref="F:AfriChat.ViewModels.BorderAlertsViewModel._selectedBorderPost"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.BorderAlertsViewModel.SelectedBorder">
+            <inheritdoc cref="F:AfriChat.ViewModels.BorderAlertsViewModel._selectedBorder"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.BorderAlertsViewModel.SelectedDelayType">
+            <inheritdoc cref="F:AfriChat.ViewModels.BorderAlertsViewModel._selectedDelayType"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.BorderAlertsViewModel.SelectedWaitTime">
+            <inheritdoc cref="F:AfriChat.ViewModels.BorderAlertsViewModel._selectedWaitTime"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.BorderAlertsViewModel.AlertDescription">
+            <inheritdoc cref="F:AfriChat.ViewModels.BorderAlertsViewModel._alertDescription"/>
+        </member>
+        <member name="F:AfriChat.ViewModels.BorderAlertsViewModel.loadCommand">
+            <summary>The backing field for <see cref="P:AfriChat.ViewModels.BorderAlertsViewModel.LoadCommand"/>.</summary>
+        </member>
+        <member name="P:AfriChat.ViewModels.BorderAlertsViewModel.LoadCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:AfriChat.ViewModels.BorderAlertsViewModel.LoadAsync"/>.</summary>
+        </member>
+        <member name="F:AfriChat.ViewModels.BorderAlertsViewModel.submitAlertCommand">
+            <summary>The backing field for <see cref="P:AfriChat.ViewModels.BorderAlertsViewModel.SubmitAlertCommand"/>.</summary>
+        </member>
+        <member name="P:AfriChat.ViewModels.BorderAlertsViewModel.SubmitAlertCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:AfriChat.ViewModels.BorderAlertsViewModel.SubmitAlertAsync"/>.</summary>
+        </member>
+        <member name="F:AfriChat.ViewModels.BorderAlertsViewModel.confirmAlertCommand">
+            <summary>The backing field for <see cref="P:AfriChat.ViewModels.BorderAlertsViewModel.ConfirmAlertCommand"/>.</summary>
+        </member>
+        <member name="P:AfriChat.ViewModels.BorderAlertsViewModel.ConfirmAlertCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:AfriChat.ViewModels.BorderAlertsViewModel.ConfirmAlertAsync(AfriChat.Models.BorderAlert)"/>.</summary>
+        </member>
+        <member name="T:AfriChat.ViewModels.ProfileViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:AfriChat.ViewModels.ProfileViewModel.User">
+            <inheritdoc cref="F:AfriChat.ViewModels.ProfileViewModel._user"/>
+        </member>
+        <member name="P:AfriChat.ViewModels.ProfileViewModel.Wallet">
+            <inheritdoc cref="F:AfriChat.ViewModels.ProfileViewModel._wallet"/>
+        </member>
+        <member name="F:AfriChat.ViewModels.ProfileViewModel.loadCommand">
+            <summary>The backing field for <see cref="P:AfriChat.ViewModels.ProfileViewModel.LoadCommand"/>.</summary>
+        </member>
+        <member name="P:AfriChat.ViewModels.ProfileViewModel.LoadCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:AfriChat.ViewModels.ProfileViewModel.LoadAsync"/>.</summary>
+        </member>
+        <member name="F:AfriChat.ViewModels.ProfileViewModel.editProfileCommand">
+            <summary>The backing field for <see cref="P:AfriChat.ViewModels.ProfileViewModel.EditProfileCommand"/>.</summary>
+        </member>
+        <member name="P:AfriChat.ViewModels.ProfileViewModel.EditProfileCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:AfriChat.ViewModels.ProfileViewModel.EditProfileAsync"/>.</summary>
+        </member>
+        <member name="T:AfriChat.Resource">
+            <summary>
+            Android Resource Designer class.
+            Exposes the Android Resource designer assembly into the project Namespace.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_Button.TextColorTo(Microsoft.Maui.Controls.Button,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_DatePicker.TextColorTo(Microsoft.Maui.Controls.DatePicker,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_Editor.TextColorTo(Microsoft.Maui.Controls.Editor,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_Entry.TextColorTo(Microsoft.Maui.Controls.Entry,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_InputView.TextColorTo(Microsoft.Maui.Controls.InputView,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_Label.TextColorTo(Microsoft.Maui.Controls.Label,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_Picker.TextColorTo(Microsoft.Maui.Controls.Picker,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_RadioButton.TextColorTo(Microsoft.Maui.Controls.RadioButton,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_SearchBar.TextColorTo(Microsoft.Maui.Controls.SearchBar,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_TimePicker.TextColorTo(Microsoft.Maui.Controls.TimePicker,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs">
+            <summary>
+            A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instances
+            for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsBusy">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsBusy" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Title">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Title" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ErrorMessage">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ErrorMessage" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Chats">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Chats" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.FilteredChats">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "FilteredChats" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SearchQuery">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SearchQuery" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CurrentUser">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CurrentUser" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ChatId">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ChatId" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ChatName">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ChatName" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Messages">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Messages" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.MessageText">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "MessageText" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsEncrypted">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsEncrypted" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Wallet">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Wallet" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Rates">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Rates" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Currencies">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Currencies" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ConvertAmount">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ConvertAmount" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.FromCurrency">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "FromCurrency" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ToCurrency">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ToCurrency" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ConvertedAmount">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ConvertedAmount" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.BalanceDisplay">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "BalanceDisplay" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.RecipientName">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "RecipientName" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.RecipientId">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "RecipientId" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Amount">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Amount" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedCurrency">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedCurrency" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Note">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Note" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.EstimatedFee">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "EstimatedFee" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TargetCurrency">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TargetCurrency" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsSuccess">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsSuccess" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Products">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Products" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Opportunities">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Opportunities" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ShowProducts">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ShowProducts" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Alerts">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Alerts" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedBorderPost">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedBorderPost" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedBorder">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedBorder" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedDelayType">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedDelayType" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedWaitTime">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedWaitTime" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.AlertDescription">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "AlertDescription" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.User">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "User" generated properties.</summary>
+        </member>
+        <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs">
+            <summary>
+            A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instances
+            for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsBusy">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsBusy" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Title">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Title" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ErrorMessage">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ErrorMessage" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Chats">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Chats" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.FilteredChats">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "FilteredChats" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SearchQuery">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SearchQuery" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CurrentUser">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CurrentUser" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ChatId">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ChatId" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ChatName">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ChatName" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Messages">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Messages" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.MessageText">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "MessageText" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsEncrypted">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsEncrypted" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Wallet">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Wallet" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Rates">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Rates" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Currencies">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Currencies" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ConvertAmount">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ConvertAmount" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.FromCurrency">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "FromCurrency" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ToCurrency">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ToCurrency" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ConvertedAmount">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ConvertedAmount" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.BalanceDisplay">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "BalanceDisplay" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.RecipientName">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "RecipientName" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.RecipientId">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "RecipientId" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Amount">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Amount" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedCurrency">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedCurrency" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Note">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Note" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.EstimatedFee">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "EstimatedFee" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TargetCurrency">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TargetCurrency" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsSuccess">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsSuccess" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Products">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Products" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Opportunities">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Opportunities" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ShowProducts">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ShowProducts" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Alerts">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Alerts" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedBorderPost">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedBorderPost" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedBorder">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedBorder" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedDelayType">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedDelayType" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedWaitTime">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedWaitTime" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.AlertDescription">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "AlertDescription" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.User">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "User" generated properties.</summary>
+        </member>
+    </members>
+</doc>

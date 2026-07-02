@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:AfriChat.ViewModels"
+             xmlns:models="clr-namespace:AfriChat.Models"
+             xmlns:controls="clr-namespace:AfriChat.Controls"
+             xmlns:shell="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"
+             x:Class="AfriChat.Views.ChatDetailPage"
+             x:DataType="vm:ChatDetailViewModel"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,Auto,*,Auto">
+
+        <!-- Custom Nav Bar -->
+        <Grid Grid.Row="0" Padding="8,52,12,10" ColumnDefinitions="Auto,48,*,Auto,Auto,Auto"
+              ColumnSpacing="6"
+              BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">
+            <BoxView Grid.Row="0" Grid.ColumnSpan="6" HeightRequest="0.5" VerticalOptions="End"
+                     Color="{AppThemeBinding Light={StaticResource BorderLight}, Dark={StaticResource BorderDark}}" />
+
+            <ImageButton Grid.Column="0" Source="icon_back.png" WidthRequest="36" HeightRequest="36"
+                         Padding="8" Command="{Binding Source={x:Static shell:Shell.Current}, Path=GoBackCommand}" />
+
+            <Frame Grid.Column="1" WidthRequest="40" HeightRequest="40" CornerRadius="20"
+                   BackgroundColor="{StaticResource AfriGreenLight}" Padding="0"
+                   HasShadow="False" BorderColor="Transparent" IsClippedToBounds="True">
+                <Label Text="KG" HorizontalOptions="Center" VerticalOptions="Center"
+                       FontFamily="PoppinsSemiBold" FontSize="14" TextColor="{StaticResource AfriGreenDark}" />
+            </Frame>
+
+            <VerticalStackLayout Grid.Column="2" VerticalOptions="Center" Spacing="1">
+                <Label Text="{Binding ChatName}" FontFamily="PoppinsMedium" FontSize="15"
+                       TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}" />
+                <HorizontalStackLayout Spacing="4">
+                    <Image Source="icon_lock_green.png" WidthRequest="10" HeightRequest="10" VerticalOptions="Center" />
+                    <Label Text="End-to-end encrypted" FontSize="11" TextColor="{StaticResource AfriGreenMid}" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <ImageButton Grid.Column="3" Source="icon_phone.png" WidthRequest="36" HeightRequest="36" Padding="8" />
+            <ImageButton Grid.Column="4" Source="icon_video.png" WidthRequest="36" HeightRequest="36" Padding="8" />
+            <ImageButton Grid.Column="5" Source="icon_more.png" WidthRequest="36" HeightRequest="36" Padding="8" />
+        </Grid>
+
+        <!-- Feature Quick Actions -->
+        <ScrollView Grid.Row="1" Orientation="Horizontal" HorizontalScrollBarVisibility="Never"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}">
+            <HorizontalStackLayout Padding="12,8" Spacing="8">
+
+                <Button Text="💸 Send Money" FontSize="12" FontFamily="PoppinsRegular"
+                        BackgroundColor="{StaticResource AfriGoldLight}" TextColor="{StaticResource AfriGold}"
+                        BorderColor="{StaticResource AfriGold}" BorderWidth="0.5"
+                        CornerRadius="20" Padding="12,6" HeightRequest="34"
+                        Command="{Binding OpenSendMoneyCommand}" />
+
+                <Button Text="🏷️ List Product" FontSize="12" FontFamily="PoppinsRegular"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}"
+                        TextColor="{AppThemeBinding Light={StaticResource TextSecondaryLight}, Dark={StaticResource TextSecondaryDark}}"
+                        BorderColor="{AppThemeBinding Light={StaticResource BorderLight}, Dark={StaticResource BorderDark}}" BorderWidth="0.5"
+                        CornerRadius="20" Padding="12,6" HeightRequest="34" />
+
+                <Button Text="⚠️ Border Alert" FontSize="12" FontFamily="PoppinsRegular"
+                        BackgroundColor="{StaticResource AfriRedLight}" TextColor="{StaticResource AfriRed}"
+                        BorderColor="{StaticResource AfriRed}" BorderWidth="0.5"
+                        CornerRadius="20" Padding="12,6" HeightRequest="34"
+                        Command="{Binding ReportBorderAlertCommand}" />
+
+                <Button Text="📈 Trade Opp" FontSize="12" FontFamily="PoppinsRegular"
+                        BackgroundColor="{StaticResource AfriBluLight}" TextColor="{StaticResource AfriBlue}"
+                        BorderColor="{StaticResource AfriBlue}" BorderWidth="0.5"
+                        CornerRadius="20" Padding="12,6" HeightRequest="34" />
+
+                <Button Text="💰 Request" FontSize="12" FontFamily="PoppinsRegular"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}"
+                        TextColor="{AppThemeBinding Light={StaticResource TextSecondaryLight}, Dark={StaticResource TextSecondaryDark}}"
+                        BorderColor="{AppThemeBinding Light={StaticResource BorderLight}, Dark={StaticResource BorderDark}}" BorderWidth="0.5"
+                        CornerRadius="20" Padding="12,6" HeightRequest="34" />
+            </HorizontalStackLayout>
+        </ScrollView>
+
+        <!-- Messages -->
+        <CollectionView Grid.Row="2" ItemsSource="{Binding Messages}" x:Name="MessagesView"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource PageBackgroundLight}, Dark={StaticResource PageBackgroundDark}}"
+                        Margin="0" ItemsUpdatingScrollMode="KeepLastItemInView">
+            <CollectionView.Header>
+                <Frame Margin="40,16" Padding="10,6" CornerRadius="14" HasShadow="False"
+                       BackgroundColor="{StaticResource AfriGreenLight}" BorderColor="Transparent"
+                       HorizontalOptions="Center">
+                    <HorizontalStackLayout Spacing="5">
+                        <Image Source="icon_lock_green.png" WidthRequest="12" HeightRequest="12" VerticalOptions="Center" />
+                        <Label Text="Messages are end-to-end encrypted" FontSize="11"
+                               TextColor="{StaticResource AfriGreenDark}" FontFamily="PoppinsRegular" />
+                    </HorizontalStackLayout>
+                </Frame>
+            </CollectionView.Header>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Message">
+                    <controls:MessageBubbleView Message="{Binding .}" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Input Bar -->
+        <Grid Grid.Row="3" Padding="10,8,10,30" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8"
+              BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray900}}">
+            <BoxView Grid.ColumnSpan="3" HeightRequest="0.5" VerticalOptions="Start"
+                     Color="{AppThemeBinding Light={StaticResource BorderLight}, Dark={StaticResource BorderDark}}" />
+
+            <ImageButton Grid.Column="0" Source="icon_attach.png" WidthRequest="36" HeightRequest="36"
+                         BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}"
+                         CornerRadius="18" Padding="8" />
+
+            <Frame Grid.Column="1" BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}"
+                   BorderColor="{AppThemeBinding Light={StaticResource BorderLight}, Dark={StaticResource BorderDark}}"
+                   CornerRadius="20" Padding="14,0" HasShadow="False" HeightRequest="40">
+                <Entry Placeholder="Message (encrypted)…" Text="{Binding MessageText}"
+                       VerticalOptions="Center" ReturnCommand="{Binding SendMessageCommand}"
+                       ReturnType="Send" />
+            </Frame>
+
+            <ImageButton Grid.Column="2" Source="icon_send.png" WidthRequest="40" HeightRequest="40"
+                         BackgroundColor="{StaticResource AfriGreen}" CornerRadius="20"
+                         Padding="10" Command="{Binding SendMessageCommand}" />
+        </Grid>
+    </Grid>
+</ContentPage>

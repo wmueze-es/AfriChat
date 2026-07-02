@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:AfriChat.ViewModels"
+             x:Class="AfriChat.Views.ProfilePage"
+             x:DataType="vm:ProfileViewModel">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="0">
+
+            <!-- Profile Header -->
+            <VerticalStackLayout Padding="20,56,20,24" Spacing="12" HorizontalOptions="Center"
+                                 BackgroundColor="{StaticResource AfriGreen}">
+                <Frame WidthRequest="80" HeightRequest="80" CornerRadius="40" Padding="0"
+                       BackgroundColor="#40FFFFFF" HasShadow="False"
+                       BorderColor="#66FFFFFF" IsClippedToBounds="True"
+                       HorizontalOptions="Center">
+                    <Label Text="{Binding User.AvatarInitials}"
+                           FontFamily="PoppinsSemiBold" FontSize="28" TextColor="White"
+                           HorizontalOptions="Center" VerticalOptions="Center" />
+                </Frame>
+                <VerticalStackLayout HorizontalOptions="Center" Spacing="4">
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="8">
+                        <Label Text="{Binding User.Name}" FontFamily="PoppinsSemiBold" FontSize="20" TextColor="White" />
+                        <Label Text="✅" FontSize="16" IsVisible="{Binding User.IsVerified}" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                    <Label Text="{Binding User.AfriPayId}" FontSize="14" TextColor="#B7DCE2" HorizontalOptions="Center" />
+                    <Label Text="{Binding User.Phone}" FontSize="13" TextColor="#ECE6DB" HorizontalOptions="Center" />
+                </VerticalStackLayout>
+
+                <!-- Quick Stats -->
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10" Margin="0,8,0,0">
+                    <Frame Grid.Column="0" BackgroundColor="#26FFFFFF"
+                           BorderColor="Transparent" CornerRadius="12" Padding="10,8" HasShadow="False">
+                        <VerticalStackLayout HorizontalOptions="Center" Spacing="2">
+                            <Label Text="KES 45,230" FontFamily="PoppinsSemiBold" FontSize="14" TextColor="White" HorizontalOptions="Center" />
+                            <Label Text="Balance" FontSize="11" TextColor="#ECE6DB" HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                    </Frame>
+                    <Frame Grid.Column="1" BackgroundColor="#26FFFFFF"
+                           BorderColor="Transparent" CornerRadius="12" Padding="10,8" HasShadow="False">
+                        <VerticalStackLayout HorizontalOptions="Center" Spacing="2">
+                            <Label Text="47" FontFamily="PoppinsSemiBold" FontSize="14" TextColor="White" HorizontalOptions="Center" />
+                            <Label Text="Trades" FontSize="11" TextColor="#ECE6DB" HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                    </Frame>
+                    <Frame Grid.Column="2" BackgroundColor="#26FFFFFF"
+                           BorderColor="Transparent" CornerRadius="12" Padding="10,8" HasShadow="False">
+                        <VerticalStackLayout HorizontalOptions="Center" Spacing="2">
+                            <Label Text="4.9 ⭐" FontFamily="PoppinsSemiBold" FontSize="14" TextColor="White" HorizontalOptions="Center" />
+                            <Label Text="Rating" FontSize="11" TextColor="#ECE6DB" HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                    </Frame>
+                </Grid>
+            </VerticalStackLayout>
+
+            <!-- Settings Sections -->
+            <VerticalStackLayout Padding="16,16,16,30" Spacing="16"
+                                 BackgroundColor="{AppThemeBinding Light={StaticResource PageBackgroundLight}, Dark={StaticResource PageBackgroundDark}}">
+
+                <!-- AfriPay -->
+                <Label Text="AfriPay" FontFamily="PoppinsMedium" FontSize="12"
+                       TextColor="{StaticResource Gray400}" Margin="4,0,0,0" />
+                <Frame Style="{StaticResource CardStyle}" Padding="0">
+                    <VerticalStackLayout>
+                        <Grid Padding="16,14" ColumnDefinitions="36,*,Auto">
+                            <Label Grid.Column="0" Text="💳" FontSize="20" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="Payment methods" FontFamily="PoppinsMedium" FontSize="14"
+                                   TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}" VerticalOptions="Center" />
+                            <Label Grid.Column="2" Text="›" FontSize="20" TextColor="{StaticResource Gray400}" VerticalOptions="Center" />
+                        </Grid>
+                        <BoxView HeightRequest="0.5" Margin="16,0" Color="{AppThemeBinding Light={StaticResource BorderLight}, Dark={StaticResource BorderDark}}" />
+                        <Grid Padding="16,14" ColumnDefinitions="36,*,Auto">
+                            <Label Grid.Column="0" Text="🔐" FontSize="20" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="Transaction PIN &amp; biometrics" FontFamily="PoppinsMedium" FontSize="14"
+                                   TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}" VerticalOptions="Center" />
+                            <Label Grid.Column="2" Text="›" FontSize="20" TextColor="{StaticResource Gray400}" VerticalOptions="Center" />
+                        </Grid>
+                        <BoxView HeightRequest="0.5" Margin="16,0" Color="{AppThemeBinding Light={StaticResource BorderLight}, Dark={StaticResource BorderDark}}" />
+                        <Grid Padding="16,14" ColumnDefinitions="36,*,Auto">
+                            <Label Grid.Column="0" Text="📊" FontSize="20" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="Transaction history" FontFamily="PoppinsMedium" FontSize="14"
+                                   TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}" VerticalOptions="Center" />
+                            <Label Grid.Column="2" Text="›" FontSize="20" TextColor="{StaticResource Gray400}" VerticalOptions="Center" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Privacy & Security -->
+                <Label Text="Privacy &amp; security" FontFamily="PoppinsMedium" FontSize="12"
+                       TextColor="{StaticResource Gray400}" Margin="4,0,0,0" />
+                <Frame Style="{StaticResource CardStyle}" Padding="0">
+                    <VerticalStackLayout>
+                        <Grid Padding="16,14" ColumnDefinitions="36,*,Auto">
+                            <Label Grid.Column="0" Text="🔑" FontSize="20" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="Encryption keys" FontFamily="PoppinsMedium" FontSize="14"
+                                   TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}" VerticalOptions="Center" />
+                            <Label Grid.Column="2" Text="›" FontSize="20" TextColor="{StaticResource Gray400}" VerticalOptions="Center" />
+                        </Grid>
+                        <BoxView HeightRequest="0.5" Margin="16,0" Color="{AppThemeBinding Light={StaticResource BorderLight}, Dark={StaticResource BorderDark}}" />
+                        <Grid Padding="16,14" ColumnDefinitions="36,*,Auto">
+                            <Label Grid.Column="0" Text="🛡️" FontSize="20" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="Privacy settings" FontFamily="PoppinsMedium" FontSize="14"
+                                   TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}" VerticalOptions="Center" />
+                            <Label Grid.Column="2" Text="›" FontSize="20" TextColor="{StaticResource Gray400}" VerticalOptions="Center" />
+                        </Grid>
+                        <BoxView HeightRequest="0.5" Margin="16,0" Color="{AppThemeBinding Light={StaticResource BorderLight}, Dark={StaticResource BorderDark}}" />
+                        <Grid Padding="16,14" ColumnDefinitions="36,*,Auto">
+                            <Label Grid.Column="0" Text="🌍" FontSize="20" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="Country &amp; language" FontFamily="PoppinsMedium" FontSize="14"
+                                   TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}" VerticalOptions="Center" />
+                            <Label Grid.Column="2" Text="›" FontSize="20" TextColor="{StaticResource Gray400}" VerticalOptions="Center" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- About -->
+                <Frame Style="{StaticResource CardStyle}" Padding="16,12">
+                    <VerticalStackLayout Spacing="6" HorizontalOptions="Center">
+                        <Label Text="🌍 AfriChat v1.0" FontFamily="PoppinsMedium" FontSize="14"
+                               TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}"
+                               HorizontalOptions="Center" />
+                        <Label Text="Connecting Africa, securely" FontSize="12"
+                               TextColor="{StaticResource Gray400}" HorizontalOptions="Center" />
+                        <Label Text="E2E encrypted · Pan-African · GDPR compliant" FontSize="11"
+                               TextColor="{StaticResource Gray400}" HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+                </Frame>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
